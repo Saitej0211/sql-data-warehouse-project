@@ -117,6 +117,7 @@ These tables follow a **Star Schema** model, where the `fact_sales` table refere
 ---
 
 ## 📚 Folder Preview
+```
 EDA/
 │
 ├── 01_database_exploration.sql
@@ -134,7 +135,7 @@ EDA/
 ├── 13_report_customers.sql
 ├── 14_report_products.sql
 └── readme.md
-
+```
 
 ---
 
