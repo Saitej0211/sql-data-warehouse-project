@@ -32,6 +32,14 @@ These tables follow a **Star Schema** model, where the `fact_sales` table refere
 | **4. Measures Exploration** | Computes key performance metrics such as total sales, average prices, and order counts. |
 | **5. Magnitude Analysis** | Aggregates business metrics like customers by region, revenue by category, and product counts. |
 | **6. Ranking Analysis** | Ranks top and bottom performers — products and customers — using `ROW_NUMBER()` and `LIMIT`. |
+| **7. Change Over Time** | Tracks monthly and yearly trends in total sales, customers, and quantity sold. |
+| **8. Cumulative Analysis** | Calculates cumulative sales (running totals) and moving averages over time. |
+| **9. Performance Analysis** | Compares product sales to averages and prior year performance (YoY). |
+| **10. Part-to-Whole Analysis** | Determines category contribution to total revenue. |
+| **11. Product Segmentation** | Groups products into cost ranges to identify pricing bands. |
+| **12. Customer Segmentation** | Segments customers by loyalty and spending (VIP, Regular, New). |
+| **13. Customer Report** | Creates a view summarizing customer KPIs like AOV, recency, and monthly spend. |
+| **14. Product Report** | Creates a view consolidating product KPIs such as lifespan, performance, and revenue. |
 
 ---
 
@@ -53,9 +61,9 @@ These tables follow a **Star Schema** model, where the `fact_sales` table refere
 
 1. **Open pgAdmin or DBeaver.**
 2. Connect to your PostgreSQL database that contains the `gold` schema.
-3. Copy the full SQL script (`gold_layer_analysis.sql`) into a query editor window.
-4. Execute section by section, or run the entire script for a complete analysis.
-5. Review outputs to understand data quality, business insights, and performance metrics.
+3. Copy the full SQL script (`EDA.sql`) or run each numbered SQL file sequentially.
+4. Execute section by section to analyze key metrics or run the entire workflow.
+5. Review query outputs for data validation and insight generation.
 
 ---
 
@@ -82,9 +90,9 @@ These tables follow a **Star Schema** model, where the `fact_sales` table refere
 
 ---
 
-## 📊 Some Insights
+## 📊 Sample Insights
 
-| Insight | Example Output |
+| Insight | Output |
 |----------|----------------|
 | Total Sales | `$29M` |
 | Active Customers | `18,484` |
@@ -97,8 +105,41 @@ These tables follow a **Star Schema** model, where the `fact_sales` table refere
 ## 🛠️ Highlights & Features
 
 - Clean **PostgreSQL-compatible** syntax (`LIMIT`, `CONCAT()`, `AGE()`, `DATE_TRUNC()`).
-- Modular structure with readable comments.
-- Works across any **star-schema warehouse** following dimensional modeling principles.
-- Includes **ranking**, **aggregation**, and **exploratory analysis** sections.
-- Ready to integrate into BI dashboards or analytics notebooks.
+- Modular structure with readable comments and section headers.
+- Works across any **Star Schema** data warehouse design.
+- Covers all aspects of **Exploratory Data Analysis (EDA)**:
+  - Ranking
+  - Aggregation
+  - Segmentation
+  - Trend and performance analysis
+- Final **report views** (`report_customers`, `report_products`) serve as ready-made datasets for BI tools like Power BI or Tableau.
+
 ---
+
+## 📚 Folder Preview
+EDA/
+│
+├── 01_database_exploration.sql
+├── 02_dimensions_exploration.sql
+├── 03_date_range_exploration.sql
+├── 04_measures_exploration.sql
+├── 05_magnitude_analysis.sql
+├── 06_ranking_analysis.sql
+├── 07_change_over_time.sql
+├── 08_cumulative_analysis.sql
+├── 09_performance_analysis.sql
+├── 10_part_to_whole_analysis.sql
+├── 11_product_segmentation.sql
+├── 12_customer_segmentation.sql
+├── 13_report_customers.sql
+├── 14_report_products.sql
+└── readme.md
+
+
+---
+
+## 🧠 Next Steps
+
+- Integrate the created SQL views (`report_customers`, `report_products`) with Power BI / Tableau dashboards.
+- Extend scripts for **Year-over-Year growth**, **Forecasting**, and **Cohort Retention Analysis**.
+- Connect with Python notebooks for automated validation and trend visualization.
