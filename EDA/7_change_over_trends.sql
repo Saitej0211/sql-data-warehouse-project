@@ -1,0 +1,46 @@
+/*
+==============================================================================
+📊 CHANGE OVER TRENDS
+------------------------------------------------------------------------------
+Purpose:
+- Track monthly and yearly sales, customer, and quantity trends.
+==============================================================================
+*/
+
+-- Yearly and monthly trend analysis
+SELECT
+    EXTRACT(YEAR FROM ORDER_DATE) AS SALES_YEAR,
+    EXTRACT(MONTH FROM ORDER_DATE) AS SALES_MONTH,
+    SUM(SALES_AMOUNT) AS TOTAL_SALES,
+    COUNT(DISTINCT CUSTOMER_KEY) AS TOTAL_CUSTOMERS,
+    SUM(QUANTITY) AS TOTAL_QUANTITY
+FROM GOLD.FACT_SALES
+WHERE ORDER_DATE IS NOT NULL
+GROUP BY
+    EXTRACT(YEAR FROM ORDER_DATE),
+    EXTRACT(MONTH FROM ORDER_DATE)
+ORDER BY
+    EXTRACT(YEAR FROM ORDER_DATE),
+    EXTRACT(MONTH FROM ORDER_DATE);
+
+-- Monthly aggregation using DATE_TRUNC for easier grouping
+SELECT
+    DATE_TRUNC('month', ORDER_DATE)::DATE AS ORDER_DATE,
+    SUM(SALES_AMOUNT) AS TOTAL_SALES,
+    COUNT(DISTINCT CUSTOMER_KEY) AS TOTAL_CUSTOMERS,
+    SUM(QUANTITY) AS TOTAL_QUANTITY
+FROM GOLD.FACT_SALES
+WHERE ORDER_DATE IS NOT NULL
+GROUP BY DATE_TRUNC('month', ORDER_DATE)
+ORDER BY DATE_TRUNC('month', ORDER_DATE);
+
+-- Display month in a more readable "YYYY-Mon" format
+SELECT
+    TO_CHAR(ORDER_DATE, 'YYYY-Mon') AS ORDER_DATE,
+    SUM(SALES_AMOUNT) AS TOTAL_SALES,
+    COUNT(DISTINCT CUSTOMER_KEY) AS TOTAL_CUSTOMERS,
+    SUM(QUANTITY) AS TOTAL_QUANTITY
+FROM GOLD.FACT_SALES
+WHERE ORDER_DATE IS NOT NULL
+GROUP BY TO_CHAR(ORDER_DATE, 'YYYY-Mon')
+ORDER BY TO_CHAR(ORDER_DATE, 'YYYY-Mon');
